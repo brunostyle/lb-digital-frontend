@@ -7,5 +7,5 @@ interface IProducts {
 }
 
 export const useProducts = create<IProducts>((set, get) => ({
-   products
+   products,
 }))
