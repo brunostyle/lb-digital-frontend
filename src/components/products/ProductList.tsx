@@ -1,7 +1,7 @@
 import { Card, Col, Row, Spacer, Text } from '@nextui-org/react';
-import { Between, WrapContainer, HiddenTitle, Wrap } from '../../styles';
+import { Between, WrapContainer, HiddenTitle, Wrap, StyledCategory } from '../../styles';
 import { useNavigate } from 'react-router-dom';
-import { IProduct } from "../../assets/interfaces"
+import { IProduct } from "../../utils/interfaces"
 
 interface IProps {
    category: string;
@@ -20,13 +20,14 @@ export const ProductList = ({ category, icon, products }: IProps) => {
          <Spacer y={.5} />
          <Wrap className="opacity">
             {products.map(product => (
-               <Card key={product.id} isHoverable isPressable onPress={() => navigate('/product/' + product.slug)}>
-                  <Card.Image src={'/' + product.images[0].original} alt={product.title} width="100%" height="100%" objectFit="cover" />
+               <Card key={product._id} isHoverable isPressable onPress={() => navigate('/product/' + product.slug)}>
+                  <Card.Image src={'/products/' + product.images[0]} alt={product.title} width="100%" height="100%" objectFit="cover" />
                   <Card.Footer>
                      <Col>
                         <HiddenTitle>{product.title}</HiddenTitle>
                         <Between>
-                           <Text b size="small" color="gray">{product.type}</Text>
+                           {/* <Text b size="small" color="gray">{product.category}</Text> */}
+                           <StyledCategory type={product.category}>{product.category}</StyledCategory>
                            <Text b>${product.price}</Text>
                         </Between>
                      </Col>

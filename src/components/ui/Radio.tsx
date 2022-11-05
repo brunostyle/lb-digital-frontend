@@ -1,13 +1,18 @@
 import { Radio as RadioNext, Text } from "@nextui-org/react";
+import { TValidCategory } from "../../utils/interfaces";
 
-export const Radio = () => (
+interface IProps {
+   label: string;
+   value: TValidCategory;
+}
+
+export const Radio = ({ label, value }:IProps) => (
    <div>
-      <Text color="primary" small>Genero</Text>
-      <RadioNext.Group aria-label="genero" defaultValue="hombres" size="xs" orientation="horizontal" css={{'div': { flexWrap: 'wrap'}}}>
-         <RadioNext value="hombres">Hombres</RadioNext>
-         <RadioNext value="mujeres">Mujeres</RadioNext>
-         <RadioNext value="niños">Niños</RadioNext>
-         <RadioNext value="unisex">Unisex</RadioNext>
+      <Text color="primary" small>{label}</Text>
+      <RadioNext.Group aria-label="categoria" defaultValue={value} size="xs" orientation="horizontal" css={{overflow: 'scroll'}}>
+         <RadioNext value="tarjetas">Tarjetas</RadioNext>
+         <RadioNext value="portadas">Portadas</RadioNext>
+         <RadioNext value="logos">Logos</RadioNext>
       </RadioNext.Group>
    </div>
 );

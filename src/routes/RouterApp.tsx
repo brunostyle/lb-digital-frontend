@@ -22,8 +22,8 @@ export const RouterApp = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/category/logos" element={<Logos />} />
-    <Route path="/category/covers" element={<Covers />} />
-    <Route path="/category/cards" element={<Cards />} />
+    <Route path="/category/portadas" element={<Covers />} />
+    <Route path="/category/tarjetas" element={<Cards />} />
     <Route path="/search/:query" element={<Search />} />
     <Route path="/product/:slug" element={<Product />} />
     <Route path="/cart" element={<Cart />} />

@@ -3,7 +3,7 @@ import { LayoutApp, ProductList } from "../../components";
 import { BsFillGrid3X3GapFill } from "../../assets/icons";
 
 const Covers = () => {
-   const products = filter('women');
+   const products = filter('portadas');
    
    return (
       <LayoutApp title="LB Digital - Portadas" description="Encuentra las mejores portadas de LB Digital">

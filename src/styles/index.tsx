@@ -102,15 +102,12 @@ export const StyledRole = styled('span', {
   display: 'inline-block',
   textTransform: 'uppercase',
   padding: '$2 $3',
-  margin: '0 2px',
   fontSize: '10px',
   fontWeight: '$bold',
   borderRadius: '14px',
   letterSpacing: '0.6px',
   lineHeight: 1,
   boxShadow: '1px 2px 5px 0px rgb(0 0 0 / 5%)',
-  alignItems: 'center',
-  alignSelf: 'center',
   variants: {
     type: {
       admin: {
@@ -128,6 +125,37 @@ export const StyledRole = styled('span', {
   },
 });
 
+export const StyledCategory = styled('span', {
+  display: 'inline-block',
+  textTransform: 'uppercase',
+  padding: '$2 $3',
+  fontSize: '9px',
+  fontWeight: '$bold',
+  borderRadius: '14px',
+  letterSpacing: '0.6px',
+  lineHeight: 1,
+  boxShadow: '1px 2px 5px 0px rgb(0 0 0 / 5%)',
+  variants: {
+    type: {
+      tarjetas: {
+        bg: '$warningLight',
+        color: '$warningLightContrast',
+      },
+      portadas: {
+        bg: '$errorLight',
+        color: '$errorLightContrast',
+      },
+      logos: {
+        bg: '$secondaryLight',
+        color: '$secondaryLightContrast',
+      },
+    },
+  },
+  defaultVariants: {
+    type: 'tarjetas',
+  },
+});
+
 export const Main = styled('main', {
   padding: '1em 0',
 });
@@ -140,4 +168,5 @@ export const Center = styled('div', {
 });
 
 export const cell = { px: '1em', maxWidth: '100px' }
+export const cellBig = { px: '1em', '@xs': {maxWidth: '150px'} }
 export const grid = { width: '100%', margin: 'auto', padding: 0 }

@@ -1,9 +1,8 @@
 import { Avatar, Card, Grid, Spacer, Text } from "@nextui-org/react";
-import { IProduct } from "../../assets/interfaces"
+import { IProduct } from "../../utils/interfaces"
 import { AiFillDelete } from '../../assets/icons'
-import { HiddenTitle, Subtitle } from "../../styles";
+import { HiddenTitle, StyledCategory, Subtitle } from "../../styles";
 import { useCart } from "../../state";
-import { ProductCounter } from "./ProductCounter";
 import { Link } from "react-router-dom";
 
 interface IProductCard {
@@ -16,11 +15,11 @@ export const ProductCard = ({ cart, editable = false }: IProductCard) => {
    return (
       <Grid xs={12} sm={6} direction="column">
          {cart.map(product => (
-            <Card key={product.id} css={{ mb: '1em' }}>
+            <Card key={product._id} css={{ mb: '1em' }}>
                <Grid.Container>
                   <Grid xs={2}>
                      <Link to={"/product/" + product.slug}>
-                        <Card.Image src={'/' + product.images[0].original} alt={product.title} width="100%" height="100%" objectFit="cover" />
+                        <Card.Image src={'/products/' + product.images[0]} alt={product.title} width="100%" height="100%" objectFit="cover" />
                      </Link>
                   </Grid>
                   <Grid xs={8}>
@@ -28,7 +27,7 @@ export const ProductCard = ({ cart, editable = false }: IProductCard) => {
                         <HiddenTitle b>{product.title}</HiddenTitle>
                         <Subtitle>{product.description}</Subtitle>
                         <Spacer y={.5} />
-                        {editable ? <ProductCounter /> : <Text b>3 items</Text>}
+                        <div><StyledCategory type={product.category}>{product.category}</StyledCategory></div>
                      </Card.Body>
                   </Grid>
                   <Grid xs={2} direction="column" justify="center" alignItems="center">

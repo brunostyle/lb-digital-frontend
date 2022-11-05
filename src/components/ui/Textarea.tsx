@@ -13,8 +13,6 @@ export const Textarea = ({ name, label }: ITextarea) => (
       label={label} 
 		fullWidth
 		color="primary"
-      bordered
-		borderWeight="light"
 		helperColor="error"
 		helperText={<ErrorMessage name={name} />}
 		as={TextField}

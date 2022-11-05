@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { IProduct } from '../assets/interfaces';
+import { IProduct } from "../utils/interfaces"
 
 interface ICart {
    cart: IProduct[];
@@ -13,7 +13,7 @@ export const useCart = create<ICart>((set, get) => ({
    subTotal: 0,
 
    addProductToCart: product => {
-      if(get().cart.find(p => p.id === product.id)) return
+      if(get().cart.find(p => p._id === product._id)) return
       set(state => ({
          cart: [...state.cart, product], 
          subTotal: state.subTotal + product.price
@@ -21,7 +21,7 @@ export const useCart = create<ICart>((set, get) => ({
    },
 
    removeProductToCart: product => set(state => ({
-      cart: state.cart.filter(p => p.id !== product.id),
+      cart: state.cart.filter(p => p._id !== product._id),
       subTotal: state.subTotal - product.price
    }))
 

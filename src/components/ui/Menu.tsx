@@ -45,8 +45,8 @@ export const Menu = () => {
                </Navbar.Item>
                <Dropdown.Menu aria-label="filtrado de productos" onAction={c => navigate('/category/' + c)}>
                   <Dropdown.Section title="Categorias">
-                     <Dropdown.Item withDivider key="cards" icon={<BsFillCreditCard2FrontFill />} css={{ fs: 'small' }}>Tarjetas</Dropdown.Item>
-                     <Dropdown.Item key="covers" icon={<BsFillGrid3X3GapFill />} css={{ fs: 'small' }}>Portadas</Dropdown.Item>
+                     <Dropdown.Item withDivider key="tarjetas" icon={<BsFillCreditCard2FrontFill />} css={{ fs: 'small' }}>Tarjetas</Dropdown.Item>
+                     <Dropdown.Item key="portadas" icon={<BsFillGrid3X3GapFill />} css={{ fs: 'small' }}>Portadas</Dropdown.Item>
                      <Dropdown.Item key="logos" icon={<IoLogoPolymer />} css={{ fs: 'small' }}>Logos</Dropdown.Item>
                   </Dropdown.Section>
                </Dropdown.Menu>

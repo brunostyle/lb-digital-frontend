@@ -1,7 +1,7 @@
 import { Avatar, Card, Grid, Text } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { BiPencil } from '../../assets/icons'
-import { IProduct } from "../../assets/interfaces";
+import { IProduct } from "../../utils/interfaces"
 import { Between, Subtitle } from "../../styles";
 
 interface IProductOrder {
@@ -17,7 +17,7 @@ export const ProductOrder = ({ cart, subTotal, editable = false, children }: IPr
       <Grid xs={12} sm={6} css={{ h: 'max-content' }}>
          <Card>
             <Card.Header>
-               {editable ? <Text b>Orden</Text> : <Text b>Resumen ({cart.length} productos)</Text>}
+               {editable ? <Text b>Orden</Text> : <Text b>Resumen ({cart.length} {cart.length === 1 ? 'producto' : 'productos'})</Text>}
             </Card.Header>
             <Card.Body css={{ pt: 0 }}>
                {!editable &&
@@ -27,7 +27,7 @@ export const ProductOrder = ({ cart, subTotal, editable = false, children }: IPr
                   </Between>}
                <Between>
                   <Subtitle>No. Productos</Subtitle>
-                  <Subtitle>{cart.length} items</Subtitle>
+                  <Subtitle>{cart.length} {cart.length === 1 ? 'item' : 'items'}</Subtitle>
                </Between>
                <Between>
                   <Subtitle>SubTotal</Subtitle>

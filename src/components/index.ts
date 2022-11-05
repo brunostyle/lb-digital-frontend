@@ -1,6 +1,4 @@
-
 export * from './ui/Banner';
-export * from './ui/Check';
 export * from './ui/Collapse';
 export * from './ui/FullScreenLoading';
 export * from './ui/Input';

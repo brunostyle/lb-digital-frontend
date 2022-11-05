@@ -15,8 +15,6 @@ export const Input = ({ name, label, icon }:IInput) => (
       color="primary"
       autoComplete="off"
       size="sm"
-      bordered
-		borderWeight="light"
       clearable 
       fullWidth 
       labelLeft={icon}
@@ -51,8 +49,6 @@ export const InputPassword = ({ name, label, icon }:IInput) => (
       color="primary"
       autoComplete="off"
       size="sm"
-      bordered
-		borderWeight="light"
       clearable 
       fullWidth 
       helperColor="error"

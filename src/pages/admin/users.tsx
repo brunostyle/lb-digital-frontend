@@ -1,43 +1,49 @@
 import { Avatar, Table, Text } from "@nextui-org/react";
-import { IUser } from "../../assets/interfaces";
+import { IUser } from "../../utils/interfaces";
 import { LayoutAdmin, Nothing } from "../../components";
 import { cell, StyledRole } from "../../styles";
 
 const users: IUser[] = [
    {
-      id: '1',
+      _id: '1',
       name: "Bruno Brian Millalipe",
       email: 'brunobrianmillalipe.com',
       role: 'admin',
       avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026024d',
    },
    {
-      id: '2',
+      _id: '2',
       name: "Boomer Millalipe",
       email: "boomer@gmail.com",
       role: 'client',
       avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
    },
    {
-      id: '3',
+      _id: '3',
       name: "Lucas Saucedo",
       email: "lucas@gmail.com",
       role: 'admin',
       avatar: 'https://i.pravatar.cc/150?u=a04258114e29026702d',
    },
    {
-      id: '4',
+      _id: '4',
       name: "Inva Millalipe",
       email: "inva@gmail.com",
       role: 'client',
       avatar: 'https://i.pravatar.cc/150?u=a048581f4e29026701d',
    },
    {
-      id: '5',
+      _id: '5',
       name: "Santi",
       email: "santi@gmail.com",
       role: 'client',
       avatar: 'https://i.pravatar.cc/150?u=a092581d4ef9026700d',
+   },
+   {
+      _id: '6',
+      name: "test1",
+      email: "test1@gmail.com",
+      role: 'client',
    }
 ];
 
@@ -55,7 +61,7 @@ const Users = () => (
             </Table.Header>
             <Table.Body>
                {users.map(user => (
-                  <Table.Row key={user.id}>
+                  <Table.Row key={user._id}>
                      <Table.Cell css={cell}><Avatar squared size="sm" color="primary" textColor="white" text={user.name.charAt(0).toUpperCase()} src={user.avatar} /></Table.Cell>
                      <Table.Cell css={cell}><Text b small>{user.name}</Text></Table.Cell>
                      <Table.Cell css={cell}><Text small color="gray">{user.email}</Text></Table.Cell>
