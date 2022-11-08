@@ -9,7 +9,7 @@ const orders: IOrder[] = [
    {
       _id: '1',
       name: "Bruno Brian Millalipe",
-      email: "brunobrianmillalipe@gmail.com",
+      email: "brunobrianmillalipe1@gmail.com",
       paid: false,
       numberOfItems: 1,
       total: 10,

@@ -1,29 +1,25 @@
 export type TValidCategory = 'tarjetas' | 'portadas' | 'logos';
 
-interface IImage {
-	original: string;
-}
-
 export interface IProduct {
 	_id: string;
-	description: string;
-	// images: IImage[];
-	images: string[];
-	price: number;
-	slug: string;
-	tags: string[];
-	title: string;
-	category: TValidCategory;
 	// createdAt: string;
 	// updatedAt: string;
+
+	title: string;
+	slug: string;
+	description: string;
+	images: string[];
+	price: number;
+	tags: string[];
+	category: TValidCategory;
 }
 
 export interface ISeedProduct {
 	title: string;
+	slug: string;
 	description: string;
 	images: string[];
 	price: number;
-	slug: string;
 	tags: string[];
 	category: TValidCategory;
 }

@@ -3,13 +3,14 @@ import { TValidCategory } from "../../utils/interfaces";
 
 interface IProps {
    label: string;
-   value: TValidCategory;
+   defaultValue: TValidCategory;
+   onChange: any;
 }
 
-export const Radio = ({ label, value }:IProps) => (
+export const Radio = ({ label, defaultValue, onChange }:IProps) => (
    <div>
       <Text color="primary" small>{label}</Text>
-      <RadioNext.Group aria-label="categoria" defaultValue={value} size="xs" orientation="horizontal" css={{overflow: 'scroll'}}>
+      <RadioNext.Group aria-label="categoria" defaultValue={defaultValue} size="xs" orientation="horizontal" css={{overflow: 'scroll'}} onChange={onChange}>
          <RadioNext value="tarjetas">Tarjetas</RadioNext>
          <RadioNext value="portadas">Portadas</RadioNext>
          <RadioNext value="logos">Logos</RadioNext>

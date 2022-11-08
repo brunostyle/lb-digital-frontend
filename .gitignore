@@ -24,6 +24,14 @@ dist-ssr
 *.sw?
 
 # BORRAR
+# public
+# routes
+# state
+# styles
+# utils
+# App.tsx
+# main.tsx
+
 # index.html
 # package.json
 # tsconfig.json

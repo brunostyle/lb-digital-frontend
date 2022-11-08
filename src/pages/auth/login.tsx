@@ -4,6 +4,7 @@ import { Form, Formik } from "formik"
 import { Input, InputPassword, LayoutAuth } from "../../components"
 import { Button } from "../../styles"
 import { FcGoogle, AiOutlineMail, Si1Password } from "../../assets/icons";
+import { loginSchema } from "../../assets/validations"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Login = () => {
 
   return (
     <LayoutAuth title="Inicia Sesión" description="o crea una cuenta">
-      <Formik initialValues={initial} onSubmit={handleSubmit}>
+      <Formik initialValues={initial} onSubmit={handleSubmit} validationSchema={loginSchema}>
         <Form>
           <Input name="email" label="Correo electronico" icon={<AiOutlineMail />} />
           <Spacer />

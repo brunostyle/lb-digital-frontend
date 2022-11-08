@@ -102,7 +102,7 @@ export const StyledRole = styled('span', {
   display: 'inline-block',
   textTransform: 'uppercase',
   padding: '$2 $3',
-  fontSize: '10px',
+  fontSize: '9px',
   fontWeight: '$bold',
   borderRadius: '14px',
   letterSpacing: '0.6px',
@@ -125,35 +125,27 @@ export const StyledRole = styled('span', {
   },
 });
 
-export const StyledCategory = styled('span', {
-  display: 'inline-block',
-  textTransform: 'uppercase',
-  padding: '$2 $3',
-  fontSize: '9px',
-  fontWeight: '$bold',
-  borderRadius: '14px',
-  letterSpacing: '0.6px',
-  lineHeight: 1,
-  boxShadow: '1px 2px 5px 0px rgb(0 0 0 / 5%)',
+export const StyledCategory = styled(StyledRole, {
   variants: {
     type: {
-      tarjetas: {
-        bg: '$warningLight',
-        color: '$warningLightContrast',
-      },
-      portadas: {
-        bg: '$errorLight',
-        color: '$errorLightContrast',
-      },
-      logos: {
-        bg: '$secondaryLight',
-        color: '$secondaryLightContrast',
-      },
+      tarjetas: { bg: '$warningLight', color: '$warningLightContrast' },
+      portadas: { bg: '$errorLight', color: '$errorLightContrast' },
+      logos: { bg: '$secondaryLight', color: '$secondaryLightContrast' },
     },
   },
-  defaultVariants: {
-    type: 'tarjetas',
+  defaultVariants: { type: 'tarjetas' },
+});
+
+export const StyledTags = styled(StyledRole, {
+  display: 'flex',
+  gap: '1em',
+  alignItems: 'center',
+  variants: {
+    type: {
+      tags: { bg: '$secondaryLight', color: '$secondaryLightContrast' },
+    },
   },
+  defaultVariants: { type: 'tags' }
 });
 
 export const Main = styled('main', {

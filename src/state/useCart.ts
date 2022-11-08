@@ -9,7 +9,18 @@ interface ICart {
 }
 
 export const useCart = create<ICart>((set, get) => ({
-   cart: [],
+   cart: [
+      {
+         _id: '3',
+         title: "Men's Raven Lightweight Zip Up Bomber Jacket",
+         description: 'Introducing the Tesla Raven Collection.',
+         images: ['1740250-00-A_0_2000.jpg', '1740250-00-A_1.jpg'],
+         category: 'portadas',
+         price: 130,
+         slug: 'men_raven_lightweight_zip_up_bomber_jacket',
+         tags: ['shirt'],
+      },   
+   ],
    subTotal: 0,
 
    addProductToCart: product => {
