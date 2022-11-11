@@ -18,7 +18,7 @@ export const Banner = () => (
                <Text hideIn="xs" color="white">Facebook</Text>
             </Button>
             <Spacer />
-            <Button auto size="sm" bordered>
+            <Button as="a" auto size="sm" bordered href="https://www.instagram.com/lb_digitaloficial/" target="_blank">
                <BsInstagram />
                <Text hideIn="xs"><Spacer x={.5} /></Text>
                <Text hideIn="xs" color="inherit">Instagram</Text>

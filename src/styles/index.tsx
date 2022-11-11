@@ -17,11 +17,11 @@ export const Wrap = styled(Grid, {
 
 export const GridContainer = styled('div', {
   width: '90%',
-  maxWidth: '650px',
+  maxWidth: '800px',
   margin: '1em auto',
   display: 'grid',
   gap: '1em',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))'
+  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))'
 })
 
 export const Between = styled('div', {

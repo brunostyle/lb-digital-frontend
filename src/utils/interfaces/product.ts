@@ -26,6 +26,7 @@ export interface ISeedProduct {
 
 export interface IDashboard {
    _id: string;
+	color: 'primary' | 'secondary' | 'gradient' | 'error' | 'success' | 'warning'
    number: number;
    text: string;
    icon: JSX.Element;

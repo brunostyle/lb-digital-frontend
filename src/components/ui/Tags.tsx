@@ -25,7 +25,7 @@ export const Tags = ({ tags, setTags }:IProps) => {
 
    return (
       <div>
-         <InputTags label="Etiquetas" value={tagValue} onChange={setTagValue} addTag={addTag} />
+         <InputTags label="Etiquetas (presiona espacio)" value={tagValue} onChange={setTagValue} addTag={addTag} />
          <Grid.Container gap={1}>
             {tags.length > 0 && tags.map(tag => <Grid key={tag}><StyledTags>{tag} <MdClose size={15} cursor="pointer" onClick={() => removeTag(tag)} /></StyledTags></Grid>)}
          </Grid.Container>

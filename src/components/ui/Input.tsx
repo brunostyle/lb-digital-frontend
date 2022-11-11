@@ -69,7 +69,7 @@ export const InputTags = ({ label, value, onChange, addTag }: IInputTags) => (
       label={label}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      onKeyUp={({ code }) => code === 'Enter' ? addTag() : undefined}
+      onKeyUp={({ code }) => code === 'Space' ? addTag() : undefined}
       color="primary"
       autoComplete="off"
       size="sm"

@@ -10,6 +10,7 @@ const orders: IOrder[] = [
       _id: '1',
       name: "Bruno Brian Millalipe",
       email: "brunobrianmillalipe1@gmail.com",
+      avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026024d',
       paid: false,
       numberOfItems: 1,
       total: 10,
@@ -30,6 +31,7 @@ const orders: IOrder[] = [
       _id: '3',
       name: "Lucas Saucedo",
       email: "lucassaucedo@gmail.com",
+      avatar: 'https://i.pravatar.cc/150?u=a048581f4e29026701d',
       paid: false,
       numberOfItems: 4,
       total: 100,
@@ -65,7 +67,7 @@ const Orders = () => (
             <Table.Body>
                {orders.map(order => (
                   <Table.Row key={order._id}>
-                     <Table.Cell css={cellBig}><User squared size="sm" color="primary" name={order.name} description={order.email} text={order.name.charAt(0).toUpperCase()} css={{ p: 0 }} /></Table.Cell>
+                     <Table.Cell css={cellBig}><User src={order.avatar} squared size="sm" color="primary" name={order.name} description={order.email} text={order.name.charAt(0).toUpperCase()} css={{ p: 0, '.nextui-avatar-text': { color: 'white'} }} /></Table.Cell>
                      <Table.Cell css={cell}><Text b small>{order.createdAt.toLocaleDateString()}</Text></Table.Cell>
                      <Table.Cell css={cell}><Text b small>{order.numberOfItems}</Text></Table.Cell>
                      <Table.Cell css={cell}><Text b small>${order.total}</Text></Table.Cell>

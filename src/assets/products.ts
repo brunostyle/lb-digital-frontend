@@ -1,26 +1,26 @@
 import { IProduct, TValidCategory } from '../utils/interfaces';
 
 export const products: IProduct[] = [
-	// {
-	// 	_id: '1',
-	// 	title: "Men's Chill Crew Neck Sweatshirt",
-	// 	description: 'Introducing the Tesla Chill Collection',
-	// 	images: ['1740176-00-A_0_2000.jpg', '1740176-00-A_1.jpg'],
-	// 	category: 'portadas',
-	// 	price: 75,
-	// 	slug: 'mens_chill_crew_neck_sweatshirt',
-	// 	tags: ['sweatshirt'],
-	// },
-	// {
-	// 	_id: '2',
-	// 	title: "Men's Quilted Shirt Jacket",
-	// 	description: "Men's Quilted Shirt Jacket features a uniquely fit",
-	// 	images: ['1740507-00-A_0_2000.jpg', '1740507-00-A_1.jpg'],
-	// 	category: 'portadas',
-	// 	price: 200,
-	// 	slug: 'men_quilted_shirt_jacket',
-	// 	tags: ['jacket'],
-	// },
+	{
+		_id: '1',
+		title: "Men's Chill Crew Neck Sweatshirt",
+		description: 'Introducing the Tesla Chill Collection',
+		images: ['1740176-00-A_0_2000.jpg', '1740176-00-A_1.jpg'],
+		category: 'portadas',
+		price: 75,
+		slug: 'mens_chill_crew_neck_sweatshirt',
+		tags: ['sweatshirt'],
+	},
+	{
+		_id: '2',
+		title: "Men's Quilted Shirt Jacket",
+		description: "Men's Quilted Shirt Jacket features a uniquely fit",
+		images: ['1740507-00-A_0_2000.jpg', '1740507-00-A_1.jpg'],
+		category: 'portadas',
+		price: 200,
+		slug: 'men_quilted_shirt_jacket',
+		tags: ['jacket'],
+	},
 	{
 		_id: '3',
 		title: "Men's Raven Lightweight Zip Up Bomber Jacket",
