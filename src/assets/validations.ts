@@ -10,7 +10,7 @@ export const loginSchema = Yup.object({
 })
 
 export const registerSchema = Yup.object({
-   name: Yup.string().trim().required('Campo requerido').max(30, 'No debe tener mas de 30 caracteres'),
+   name: Yup.string().trim().required('Campo requerido').min(3, 'Debe tener al menos 3 caracteres').max(30, 'No debe tener mas de 30 caracteres'),
    email: Yup.string().trim().required('Campo requerido').email('Correo electronico no valido').max(30, 'No debe tener mas de 30 caracteres'),
    password: Yup.string().trim().required('Campo requerido').min(6, 'Debe tener al menos 6 caracteres').max(30, 'No debe tener mas de 30 caracteres'),
 })

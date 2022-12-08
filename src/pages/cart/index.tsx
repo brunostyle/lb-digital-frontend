@@ -1,18 +1,30 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate as useRouter } from "react-router-dom";
 import { Grid } from "@nextui-org/react";
 import { AiOutlineCreditCard } from '../../assets/icons'
 import { Button, SectionTitle, SectionSubTitle, grid } from "../../styles";
-import { useCart } from "../../state";
+import { useCart, useUser } from "../../state";
 import { LayoutApp, ProductCard, ProductOrder } from "../../components";
 
 const Cart = () => {
-   const navigate = useNavigate();
-   const { cart, subTotal } = useCart();
+   const router = useRouter();
+   const { cart, total, numberOfItems } = useCart();
+   const { user } = useUser();
 
    useEffect(() => {
-      cart.length === 0 && navigate('/cart/empty')
+      numberOfItems < 1 && router('/cart/empty')
    }, [cart]);
+
+   const handleCart = () => {
+      console.log({
+         userID: user?._id,
+         orderItems: cart,
+         numberOfItems,
+         total,
+         paid: false
+      })
+      // router('/checkout/summary')
+   } 
 
    return (
       <LayoutApp title="Carrito" description="Carrito de compras de la tienda">
@@ -20,8 +32,8 @@ const Cart = () => {
          <SectionSubTitle>Mis productos</SectionSubTitle>
          <Grid.Container gap={2} css={grid}>
             <ProductCard editable cart={cart} />
-            <ProductOrder editable cart={cart} subTotal={subTotal}>
-               <Button icon={<AiOutlineCreditCard />} onPress={() => navigate('/checkout/summary')}>Comprar</Button>
+            <ProductOrder editable total={total} numberOfItems={numberOfItems}>
+               <Button icon={<AiOutlineCreditCard />} onPress={handleCart}>Comprar</Button>
             </ProductOrder>
          </Grid.Container>
       </LayoutApp>

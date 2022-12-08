@@ -13,7 +13,7 @@ const ProductSlug = () => {
    const { slug } = useParams();
    const product = getProductBySlug(String(slug));
    const [tags, setTags] = useState<string[]>(product ? product.tags : []);
-   const [category, setCategory] = useState<TValidCategory>(product ? product.category : 'tarjetas');
+   const [category, setCategory] = useState<TValidCategory>(product ? product.category : 'cards');
    const initial = { title: '', description: '', slug: '', price: '' }
 
    const validate = (values: any) => {

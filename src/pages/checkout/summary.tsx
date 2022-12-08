@@ -4,7 +4,7 @@ import { useCart } from "../../state";
 import { LayoutApp, ProductCard, ProductOrder, ProductPay } from "../../components";
 
 const Summary = () => {
-   const { cart, subTotal } = useCart();
+   const { cart, total, numberOfItems } = useCart();
 
    return (
       <LayoutApp title="Resumen de orden" description="Resumen de la orden">
@@ -12,7 +12,7 @@ const Summary = () => {
          <SectionSubTitle>Resumen de la orden</SectionSubTitle>
          <Grid.Container gap={2} css={grid}>
             <ProductCard cart={cart} />
-            <ProductOrder cart={cart} subTotal={subTotal}>
+            <ProductOrder total={total} numberOfItems={numberOfItems}>
                <ProductPay />
             </ProductOrder>
          </Grid.Container>

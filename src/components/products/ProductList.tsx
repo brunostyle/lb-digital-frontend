@@ -1,7 +1,7 @@
 import { Card, Col, Row, Spacer, Text } from '@nextui-org/react';
 import { Between, WrapContainer, HiddenTitle, Wrap, StyledCategory } from '../../styles';
-import { useNavigate } from 'react-router-dom';
 import { IProduct } from "../../utils/interfaces"
+import { useNavigate as useRouter } from 'react-router-dom';
 
 interface IProps {
    category: string;
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export const ProductList = ({ category, icon, products }: IProps) => {
-   const navigate = useNavigate();
+   const router = useRouter();
    return (
       <WrapContainer>
          <Row align="center" css={{gap: '.5em'}}>
@@ -20,7 +20,7 @@ export const ProductList = ({ category, icon, products }: IProps) => {
          <Spacer y={.5} />
          <Wrap className="opacity">
             {products.map(product => (
-               <Card key={product._id} isHoverable isPressable onPress={() => navigate('/product/' + product.slug)}>
+               <Card key={product._id} isHoverable isPressable onPress={() => router('/product/' + product.slug)}>
                   <Card.Image src={'/products/' + product.images[0]} alt={product.title} width="100%" height="100%" objectFit="cover" />
                   <Card.Footer>
                      <Col>

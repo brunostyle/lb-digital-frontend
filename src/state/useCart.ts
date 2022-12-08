@@ -3,26 +3,30 @@ import { IProduct } from "../utils/interfaces"
 
 interface ICart {
    cart: IProduct[];
-   subTotal: number;
+   total: number;
+   numberOfItems: number;
    addProductToCart: (product: IProduct) => void;
    removeProductToCart: (product: IProduct) => void;
 }
 
 export const useCart = create<ICart>((set, get) => ({
    cart: [],
-   subTotal: 0,
+   total: 0,
+   numberOfItems: 0,
 
    addProductToCart: product => {
       if(get().cart.find(p => p._id === product._id)) return
       set(state => ({
          cart: [...state.cart, product], 
-         subTotal: state.subTotal + product.price
+         total: state.total + product.price,
+         numberOfItems: get().numberOfItems + 1
       }))
    },
 
    removeProductToCart: product => set(state => ({
       cart: state.cart.filter(p => p._id !== product._id),
-      subTotal: state.subTotal - product.price
+      total: state.total - product.price,
+      numberOfItems: get().numberOfItems - 1
    }))
 
 }))

@@ -60,19 +60,18 @@ interface IInputTags {
    label: string;
    value: string;
    onChange: any;
-   addTag: () => void;
 }
 
-export const InputTags = ({ label, value, onChange, addTag }: IInputTags) => (
+export const InputTags = ({ label, value, onChange }: IInputTags) => (
    <NextInput
       aria-label="input"
       label={label}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      onKeyUp={({ code }) => code === 'Space' ? addTag() : undefined}
       color="primary"
       autoComplete="off"
       size="sm"
       fullWidth
+      clearable
    />
 )

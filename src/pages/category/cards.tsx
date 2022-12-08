@@ -1,13 +1,16 @@
-import { filter } from "../../assets/products";
-import { LayoutApp, ProductList } from "../../components";
+import { FullScreenLoading, LayoutApp, ProductList } from "../../components";
 import { BsFillCreditCard2FrontFill } from "../../assets/icons";
+import { useProducts } from "../../hooks";
 
 const Cards = () => {
-   const products = filter('tarjetas');
+   const { data: products, isLoading } = useProducts({key: "cards", path: "/products?category=cards"});
    
    return (
       <LayoutApp title="LB Digital - Tarjetas digitales" description="Encuentra las mejores tarjetas digitales de LB Digital">
-         <ProductList category="Tarjetas digitales" icon={<BsFillCreditCard2FrontFill />} products={products} />
+         {isLoading
+            ? <FullScreenLoading />
+            : <ProductList category="Tarjetas digitales" icon={<BsFillCreditCard2FrontFill />} products={products ?? []} />
+         }
       </LayoutApp>
    )
 };

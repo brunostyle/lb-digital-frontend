@@ -4,7 +4,7 @@ import { FiShoppingCart } from "../../assets/icons";
 import { getProductBySlug } from "../../assets/products";
 import { Between, Button, grid, StyledCategory, Title } from "../../styles";
 import { useCart } from "../../state";
-import { LayoutApp, ProductCounter } from "../../components";
+import { LayoutApp } from "../../components";
 import ImageGallery from 'react-image-gallery';
 
 const Product = () => {
@@ -32,9 +32,6 @@ const Product = () => {
                               <Text b h4>${product.price}</Text>
                               <StyledCategory type={product.category}>{product.category}</StyledCategory>
                            </Between>
-                           {/* <Text b h6>Cantidad</Text>
-                           <ProductCounter />
-                           <Spacer x={.5} /> */}
                            <Text b h6>Descripción</Text>
                            <Text color="gray" size="small">{product.description}</Text>
                            <Spacer x={.5} />

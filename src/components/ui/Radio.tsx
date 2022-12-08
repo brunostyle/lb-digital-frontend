@@ -11,8 +11,8 @@ export const Radio = ({ label, defaultValue, onChange }:IProps) => (
    <div>
       <Text color="primary" small>{label}</Text>
       <RadioNext.Group aria-label="categoria" defaultValue={defaultValue} size="xs" orientation="horizontal" css={{overflow: 'scroll'}} onChange={onChange}>
-         <RadioNext value="tarjetas">Tarjetas</RadioNext>
-         <RadioNext value="portadas">Portadas</RadioNext>
+         <RadioNext value="cards">Tarjetas</RadioNext>
+         <RadioNext value="covers">Portadas</RadioNext>
          <RadioNext value="logos">Logos</RadioNext>
       </RadioNext.Group>
    </div>

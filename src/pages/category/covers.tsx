@@ -1,13 +1,16 @@
-import { filter } from "../../assets/products";
-import { LayoutApp, ProductList } from "../../components";
+import { FullScreenLoading, LayoutApp, ProductList } from "../../components";
 import { BsFillGrid3X3GapFill } from "../../assets/icons";
+import { useProducts } from "../../hooks";
 
 const Covers = () => {
-   const products = filter('portadas');
+   const { data: products, isLoading } = useProducts({key: "covers", path: "/products?category=covers"});
    
    return (
       <LayoutApp title="LB Digital - Portadas" description="Encuentra las mejores portadas de LB Digital">
-         <ProductList category="Portadas" icon={<BsFillGrid3X3GapFill />} products={products} />
+         {isLoading 
+            ? <FullScreenLoading />
+            : <ProductList category="Portadas" icon={<BsFillGrid3X3GapFill />} products={products ?? []} />
+         }
       </LayoutApp>
    )
 };

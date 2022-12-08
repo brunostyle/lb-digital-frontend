@@ -1,15 +1,21 @@
-import { Link, Spacer, Button as ButtonNext } from "@nextui-org/react"
-import { useNavigate, Link as NextLink } from "react-router-dom"
+import { Link, Spacer, Button as ButtonNext, Loading } from "@nextui-org/react"
+import { useNavigate as useRouter, Link as NextLink } from "react-router-dom"
 import { Form, Formik } from "formik"
 import { Input, InputPassword, LayoutAuth } from "../../components"
 import { AiOutlineMail, Si1Password } from "../../assets/icons";
 import { registerSchema } from "../../assets/validations";
+import { IRegister } from "../../utils/interfaces";
+import { useAuth } from "../../hooks";
+
+const initial: IRegister = { name: 'bruno', email: 'bruno@gmail.com', password: '123456' };
 
 const Register = () => {
-  const navigate = useNavigate();
-  const initial = { name: '', email: '', password: '' };
-  const handleSubmit = (data: any) => {
-    console.log(data);
+  const router = useRouter();
+  const { mutate, isLoading } = useAuth({path: '/register'});
+  const handleSubmit = (data: IRegister) => {
+    mutate(data, {
+      onSuccess: () => router('/')
+    })
   }
 
   return (
@@ -22,7 +28,7 @@ const Register = () => {
           <Spacer />
           <InputPassword name="password" label="Contraseña" icon={<Si1Password />} />
           <Spacer y={2} />
-          <ButtonNext type="submit" size="sm" css={{w: '100%'}} icon={<AiOutlineMail />}>Crear cuenta</ButtonNext>
+          <ButtonNext type="submit" size="sm" css={{w: '100%'}} icon={isLoading ? <Loading size="xs" color="white" /> : <AiOutlineMail />}>Crear cuenta</ButtonNext>
         </Form>
       </Formik>
       <Spacer />

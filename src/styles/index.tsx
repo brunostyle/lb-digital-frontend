@@ -128,12 +128,12 @@ export const StyledRole = styled('span', {
 export const StyledCategory = styled(StyledRole, {
   variants: {
     type: {
-      tarjetas: { bg: '$warningLight', color: '$warningLightContrast' },
-      portadas: { bg: '$errorLight', color: '$errorLightContrast' },
+      cards: { bg: '$warningLight', color: '$warningLightContrast' },
+      covers: { bg: '$errorLight', color: '$errorLightContrast' },
       logos: { bg: '$secondaryLight', color: '$secondaryLightContrast' },
     },
   },
-  defaultVariants: { type: 'tarjetas' },
+  defaultVariants: { type: 'cards' },
 });
 
 export const StyledTags = styled(StyledRole, {

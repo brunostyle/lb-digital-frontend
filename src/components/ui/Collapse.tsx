@@ -1,84 +1,24 @@
 import { Navbar, Link, Spacer, Divider } from '@nextui-org/react';
 import { Formik, Form, FormikHelpers } from 'formik'
-import { useNavigate } from 'react-router-dom'
-import { FaSearch, AiOutlineHome, BsKey, BiExit, BiUserCircle, FiUsers, BiGridAlt, AiOutlineTags, MdOutlineChangeHistory } from '../../assets/icons'
+import { FaSearch, AiOutlineHome, BsKey, BiExit, FiUsers, BiGridAlt, AiOutlineTags, MdOutlineChangeHistory } from '../../assets/icons'
 import { InputSearch } from './Input';
 import { Subtitle } from '../../styles';
 import { searchSchema } from '../../assets/validations';
-
-interface IItems {
-   id: number,
-   to: string,
-   text: string,
-   icon: JSX.Element;
-}
-
-const collapseItemsUser: IItems[] = [
-   {
-      id: 1,
-      to: '/',
-      text: 'Inicio',
-      icon: <AiOutlineHome />
-   },
-   {
-      id: 2,
-      to: '/',
-      text: 'Perfil',
-      icon: <BiUserCircle />
-   },
-   {
-      id: 3,
-      to: '/auth/login',
-      text: 'Ingresar',
-      icon: <BsKey />
-   },
-   {
-      id: 4,
-      to: '/auth/login',
-      text: 'Salir',
-      icon: <BiExit />
-   },
-];
-
-const collapseItemsAdmin: IItems[] = [
-   {
-      id: 1,
-      to: '/admin',
-      text: 'Dashboard',
-      icon: <BiGridAlt />
-   },
-   {
-      id: 2,
-      to: '/admin/products',
-      text: 'Productos',
-      icon: <AiOutlineTags />
-   },
-   {
-      id: 3,
-      to: '/admin/orders',
-      text: 'Ordenes',
-      icon: <MdOutlineChangeHistory />
-   },
-   {
-      id: 4,
-      to: '/admin/users',
-      text: 'Usuarios',
-      icon: <FiUsers />
-   },
-];
+import { useUser } from '../../state';
+import { useNavigate as useRouter, useLocation } from 'react-router-dom'
 
 interface ISearch { query: string }
 const values: ISearch = { query: '' }
 
 export const Collapse = () => {
-   const navigate = useNavigate();
+   const router = useRouter();
+   const { isLogged, user } = useUser();
    const handleSubmit = ({ query }: ISearch, { resetForm }: FormikHelpers<ISearch>) => {
-      navigate('/search/' + query);
-      // resetForm();
+      router('/search/' + query);
    }
 
    return (
-      <Navbar.Collapse css={{ '@xs': { mw: 'max-content', left: 'auto' } }}>
+      <Navbar.Collapse css={{ '@xs': { mw: 'max-content', minWidth: '200px', left: 'auto' } }}>
          <Formik initialValues={values} onSubmit={handleSubmit} validationSchema={searchSchema}>
             <Form>
                <Navbar.CollapseItem css={{ '@xs': { display: 'none' } }}>
@@ -86,30 +26,49 @@ export const Collapse = () => {
                </Navbar.CollapseItem>
             </Form>
          </Formik>
-         <CollapseContainer text="Menu" items={collapseItemsUser} />
-         <CollapseContainer text="Administración" items={collapseItemsAdmin} />
+
+         <Divisor text="Menu" />
+         <Item text="Inicio"        to="/" icon={<AiOutlineHome />} />
+         {isLogged 
+            ? <Item text="Salir"    to="/auth/login" icon={<BiExit />} />
+            : <Item text="Ingresar" to="/auth/login" icon={<BsKey />} />
+         }
+         {user?.role === "admin" &&
+            <>
+               <Divisor text="Administración" />
+               <Item text="Dashboard" to="/admin" icon={<BiGridAlt />} />
+               <Item text="Productos" to="/admin/products" icon={<AiOutlineTags />} />
+               <Item text="Ordenes"   to="/admin/orders" icon={<MdOutlineChangeHistory />} />
+               <Item text="Usuarios"  to="/admin/users" icon={<FiUsers />} />
+            </>
+         }
       </Navbar.Collapse>
    )
 };
 
-interface IProps {
-   text: string;
-   items: IItems[];
+interface IItem {
+   to: string,
+   text: string,
+   icon: JSX.Element;
 }
 
-export const CollapseContainer = ({ text, items }: IProps) => {
-   const navigate = useNavigate();
-   return <>
-      <Navbar.CollapseItem css={{ fd: 'column', ai: 'start' }}>
-         <Subtitle>{text}</Subtitle>
-         <Divider y={1} />
+export const Item = ({ to, text, icon }: IItem) => {
+   const router = useRouter();
+   const location = useLocation();
+   const { logout } = useUser();
+   return (
+      <Navbar.CollapseItem>
+         <Link color={location.pathname === to ? "primary" : "text"} block css={{ minWidth: '100%', fontSize: '.9rem', background: `${location.pathname === to ? '$primaryLightHover' : 'none'}` }} onClick={() => text === "Salir" ? logout() : router(to)}>
+            <Spacer x={.5} />{icon}<Spacer />{text}<Spacer x={.5} />
+         </Link>
       </Navbar.CollapseItem>
-      {items.map(item => (
-         <Navbar.CollapseItem key={item.id}>
-            <Link color="text" block css={{ minWidth: '100%', fontSize: '.9rem' }} onClick={() => navigate(item.to)}>
-               <Spacer x={.5} />{item.icon}<Spacer />{item.text}<Spacer x={.5} />
-            </Link>
-         </Navbar.CollapseItem>
-      ))}
-   </>
+   )
 }
+
+export const Divisor = ({ text }: { text: string }) => (
+   <Navbar.CollapseItem css={{ fd: 'column', ai: 'start' }}>
+      <Subtitle>{text}</Subtitle>
+      <Divider y={1} />
+   </Navbar.CollapseItem>
+)
+//124

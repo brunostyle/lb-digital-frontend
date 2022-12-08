@@ -1,21 +1,22 @@
 import { Navbar, Text, Dropdown, Spacer, Badge } from '@nextui-org/react';
 import { FaSearch, BiSun, MdOutlineNightlight, FiShoppingCart, BiFilter, BsFillCreditCard2FrontFill, BsFillGrid3X3GapFill, IoLogoPolymer } from '../../assets/icons'
 import { Formik, Form, FormikHelpers } from 'formik'
-import { InputSearch, Collapse } from '../index';
-import { useNavigate, Link as NextLink } from 'react-router-dom'
+import { InputSearch, Collapse, User } from '../index';
 import { searchSchema } from '../../assets/validations';
-import { useCart, useTheme } from '../../state';
+import { useCart, useTheme, useUser } from '../../state';
 import { Logo } from './Logo';
+import { useNavigate as useRouter, Link as NextLink } from 'react-router-dom'
 
 interface ISearch { query: string }
 const values: ISearch = { query: '' }
 
 export const Menu = () => {
-   const navigate = useNavigate();
-   const { cart } = useCart();
+   const router = useRouter();
+   const { numberOfItems } = useCart();
+   const { isLogged, user } = useUser();
    const { isLight, changeTheme } = useTheme();
    const handleSubmit = ({ query }: ISearch, { resetForm }: FormikHelpers<ISearch>) => {
-      navigate('/search/' + query);
+      router('/search/' + query);
       // resetForm();
    }
 
@@ -43,10 +44,10 @@ export const Menu = () => {
                <Navbar.Item>
                   <Dropdown.Button auto light icon={<BiFilter />} ripple={false} css={{ p: '.5em' }}>Filtrar</Dropdown.Button>
                </Navbar.Item>
-               <Dropdown.Menu aria-label="filtrado de productos" onAction={c => navigate('/category/' + c)}>
+               <Dropdown.Menu aria-label="filtrado de productos" onAction={c => router('/category/' + c)}>
                   <Dropdown.Section title="Categorias">
-                     <Dropdown.Item withDivider key="tarjetas" icon={<BsFillCreditCard2FrontFill />} css={{ fs: 'small' }}>Tarjetas</Dropdown.Item>
-                     <Dropdown.Item key="portadas" icon={<BsFillGrid3X3GapFill />} css={{ fs: 'small' }}>Portadas</Dropdown.Item>
+                     <Dropdown.Item withDivider key="cards" icon={<BsFillCreditCard2FrontFill />} css={{ fs: 'small' }}>Tarjetas</Dropdown.Item>
+                     <Dropdown.Item key="covers" icon={<BsFillGrid3X3GapFill />} css={{ fs: 'small' }}>Portadas</Dropdown.Item>
                      <Dropdown.Item key="logos" icon={<IoLogoPolymer />} css={{ fs: 'small' }}>Logos</Dropdown.Item>
                   </Dropdown.Section>
                </Dropdown.Menu>
@@ -56,9 +57,11 @@ export const Menu = () => {
                {isLight ? <BiSun /> : <MdOutlineNightlight />}
             </Navbar.Item>
 
-            <Badge isInvisible={cart.length === 0} content={cart.length < 10 ? cart.length : "+9"} disableAnimation disableOutline size="sm" color="primary" css={{ top: -5, right: -5 }}>
-               <Navbar.Link onClick={() => navigate('/cart')}><FiShoppingCart /></Navbar.Link>
+            <Badge isInvisible={numberOfItems === 0} content={numberOfItems < 10 ? numberOfItems : "+9"} disableAnimation disableOutline size="sm" color="primary" css={{ top: -5, right: -5 }}>
+               <Navbar.Link onClick={() => router('/cart')}><FiShoppingCart /></Navbar.Link>
             </Badge>
+
+            {/* {isLogged && <User user={user!} />} */}
 
             <Navbar.Toggle />
          </Navbar.Content>

@@ -2,7 +2,7 @@ import { SectionSubTitle, SectionTitle, Between, Main } from '../../styles';
 import { FaPlus } from "../../assets/icons";
 import { Button } from '@nextui-org/react';
 import { MenuAdmin } from '../ui/MenuAdmin';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate as useRouter } from 'react-router-dom';
 
 interface ILayout {
    children: JSX.Element | JSX.Element[];
@@ -13,7 +13,7 @@ interface ILayout {
 }
 
 export const LayoutAdmin = ({ children, title, description, showTitle = true, funtional = false }: ILayout) => {
-   const navigate = useNavigate();
+   const router = useRouter();
    return (
       <>
          <MenuAdmin />
@@ -23,7 +23,7 @@ export const LayoutAdmin = ({ children, title, description, showTitle = true, fu
                   {funtional ?
                      <Between css={{ px: '1em' }}>
                         <SectionTitle css={{ ta: 'start' }}>{title}</SectionTitle>
-                        <Button auto size="xs" icon={<FaPlus />} onPress={() => navigate('/admin/products/new')}>Agregar</Button>
+                        <Button auto size="xs" icon={<FaPlus />} onPress={() => router('/admin/products/new')}>Agregar</Button>
                      </Between>
                      :
                      <>

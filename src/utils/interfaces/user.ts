@@ -8,10 +8,3 @@ export interface IUser {
    role: TValidRoles;
    avatar?: string;
 }
-
-export interface ISeedUser {
-	name: string;
-	email: string;
-	password: string;
-	role: TValidRoles;
-}

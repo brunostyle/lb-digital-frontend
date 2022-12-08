@@ -1,10 +1,9 @@
 import { LayoutApp, Nothing, ProductList } from '../../components';
 import { useParams } from 'react-router-dom';
-import { findProduct } from '../../assets/products';
+import { products } from '../../assets/products';
 
 const Search = () => {
    const { query } = useParams();
-   const products = findProduct(query!);
 
    return (
       <LayoutApp title="LB Digital - Inicio" description="Encuentra los mejores productos de LB Digital aquí">

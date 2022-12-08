@@ -1,12 +1,12 @@
 // import Head from 'next/head';
-import { useProducts } from '../state'
-import { Menu, ProductList, Banner } from '../components';
+import { useProducts } from '../hooks'
+import { Menu, ProductList, Banner, FullScreenLoading } from '../components';
 import { BiFilter } from '../assets/icons';
 import { Gradient, Main } from '../styles';
 
 const Home = () => {
-	const { products } = useProducts();
-
+	const { data: products, isLoading } = useProducts({key: "products", path: "/products"});
+	
 	return <>
 		{/* <Head>
 			<title>LB Digital - Inicio</title>
@@ -18,7 +18,10 @@ const Home = () => {
 			<Menu />
 			<Main>
 				<Banner />
-				<ProductList category="Todos los productos" icon={<BiFilter />} products={products} />
+				{isLoading
+					? <FullScreenLoading />
+					: <ProductList category="Todos los productos" icon={<BiFilter />} products={products ?? []} />
+				}
 			</Main>
 		</Gradient>
 	</>

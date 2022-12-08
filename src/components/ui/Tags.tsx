@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Grid } from "@nextui-org/react";
+import { Button, Grid, Row, Spacer } from "@nextui-org/react";
 import { StyledTags } from "../../styles";
 import { InputTags } from "./Input";
-import { MdClose } from "../../assets/icons";
+import { GrAdd, MdClose } from "../../assets/icons";
 
 interface IProps {
    tags: string[];
@@ -17,6 +17,7 @@ export const Tags = ({ tags, setTags }:IProps) => {
    }
 
    const addTag = () => {
+      if(tagValue === "") return;
       const newTag = tagValue.trim().toLowerCase();
       if (tags.includes(newTag)) return;
       setTagValue('');
@@ -25,7 +26,11 @@ export const Tags = ({ tags, setTags }:IProps) => {
 
    return (
       <div>
-         <InputTags label="Etiquetas (presiona espacio)" value={tagValue} onChange={setTagValue} addTag={addTag} />
+         <Row align="flex-end">
+            <InputTags label="Etiquetas" value={tagValue} onChange={setTagValue} />
+            <Spacer x={.2} />
+            <Button flat auto size="sm" onPress={addTag}><GrAdd /></Button>
+         </Row>
          <Grid.Container gap={1}>
             {tags.length > 0 && tags.map(tag => <Grid key={tag}><StyledTags>{tag} <MdClose size={15} cursor="pointer" onClick={() => removeTag(tag)} /></StyledTags></Grid>)}
          </Grid.Container>

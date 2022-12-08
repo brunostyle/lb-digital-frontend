@@ -3,6 +3,6 @@ import { Center } from "../../styles";
 
 export const FullScreenLoading = () => (
    <Center>
-      <Loading type="gradient" />
+      <Loading type="points" />
    </Center>
 )

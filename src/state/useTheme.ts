@@ -6,7 +6,7 @@ interface ITheme {
 }
 
 export const useTheme = create<ITheme>(set => ({
-   isLight: true,
+   isLight: false,
    
    changeTheme: () => set(state => ({
       isLight: !state.isLight
