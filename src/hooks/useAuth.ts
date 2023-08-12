@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query"
-import toast from "react-hot-toast";
 import { useUser } from "../state";
 import { baseURL } from "../utils/database/api";
 import { IAuth, ILogin, IRegister } from "../utils/interfaces";
@@ -27,7 +26,6 @@ export const useAuth = ({path}:IProps) => {
    const { login } = useUser();
    return useMutation((data: ILogin | IRegister) => auth(path, data), {
       onSuccess: (user) => {
-			toast.success(`Bienvenido ${user.name}`);
          localStorage.setItem('token', user.token);
          login(user)
       }

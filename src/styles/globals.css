@@ -8,8 +8,13 @@
   display: none;
 }
 
-.nextui-c-PJLV-vjOIS-isFocusVisible-true {
+.nextui-c-gulvcB-eEgXHE-isFocusVisible-true {
   box-shadow: none;
+}
+
+.nextui-c-iTPCAT-VujqA-disableBlur-false .nextui-c-jklhtj:where(.nextui-c-ewlcFW) {
+  background: none;
+  backdrop-filter: none;
 }
 
 .image-gallery-icon:focus {

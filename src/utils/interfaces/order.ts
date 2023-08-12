@@ -1,3 +1,4 @@
+import { IProduct, IAuth } from "./index";
 
 export interface IOrder {
    _id: string;
@@ -9,4 +10,14 @@ export interface IOrder {
    total: number;
 	createdAt: Date;
 	updatedAt: Date;
+}
+
+export interface IOrderSummary {
+   user?: IAuth;
+   orderItems: IProduct[];
+   paid: boolean;
+   numberOfItems: number;
+   total: number;
+	createdAt?: Date;
+	updatedAt?: Date;
 }

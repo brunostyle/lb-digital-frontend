@@ -13,9 +13,9 @@ export const App = () => {
   return (
     <QueryClientProvider client={client}>
       <NextUIProvider theme={isLight ? lightTheme : darkTheme}>
-        <LayoutMain>
+        {/* <LayoutMain> */}
           <RouterApp />
-        </LayoutMain>
+        {/* </LayoutMain> */}
         <Toast />
       </NextUIProvider>
       <ReactQueryDevtools />

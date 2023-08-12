@@ -5,6 +5,7 @@ import { AiOutlineCreditCard } from '../../assets/icons'
 import { Button, SectionTitle, SectionSubTitle, grid } from "../../styles";
 import { useCart, useUser } from "../../state";
 import { LayoutApp, ProductCard, ProductOrder } from "../../components";
+import { IOrderSummary } from "../../utils/interfaces";
 
 const Cart = () => {
    const router = useRouter();
@@ -16,15 +17,10 @@ const Cart = () => {
    }, [cart]);
 
    const handleCart = () => {
-      console.log({
-         userID: user?._id,
-         orderItems: cart,
-         numberOfItems,
-         total,
-         paid: false
-      })
-      // router('/checkout/summary')
-   } 
+      const order: IOrderSummary = { user, numberOfItems, total, orderItems: cart, paid: false }
+      console.log(order);
+      // router('/checkout/summary');
+   }
 
    return (
       <LayoutApp title="Carrito" description="Carrito de compras de la tienda">

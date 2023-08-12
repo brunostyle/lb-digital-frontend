@@ -1,10 +1,10 @@
-import { Navbar, Link, Spacer, Divider } from '@nextui-org/react';
+import { Navbar, Link, Button, Spacer, Divider } from '@nextui-org/react';
 import { Formik, Form, FormikHelpers } from 'formik'
-import { FaSearch, AiOutlineHome, BsKey, BiExit, FiUsers, BiGridAlt, AiOutlineTags, MdOutlineChangeHistory } from '../../assets/icons'
+import { FaSearch, AiOutlineHome, BsKey, FiUsers, BiGridAlt, AiOutlineTags, MdOutlineChangeHistory, BiSun, MdOutlineNightlight } from '../../assets/icons'
 import { InputSearch } from './Input';
-import { Subtitle } from '../../styles';
+import { Between, Subtitle } from '../../styles';
 import { searchSchema } from '../../assets/validations';
-import { useUser } from '../../state';
+import { useTheme, useUser } from '../../state';
 import { useNavigate as useRouter, useLocation } from 'react-router-dom'
 
 interface ISearch { query: string }
@@ -12,6 +12,7 @@ const values: ISearch = { query: '' }
 
 export const Collapse = () => {
    const router = useRouter();
+   const { isLight, changeTheme } = useTheme();
    const { isLogged, user } = useUser();
    const handleSubmit = ({ query }: ISearch, { resetForm }: FormikHelpers<ISearch>) => {
       router('/search/' + query);
@@ -28,20 +29,27 @@ export const Collapse = () => {
          </Formik>
 
          <Divisor text="Menu" />
-         <Item text="Inicio"        to="/" icon={<AiOutlineHome />} />
-         {isLogged 
-            ? <Item text="Salir"    to="/auth/login" icon={<BiExit />} />
-            : <Item text="Ingresar" to="/auth/login" icon={<BsKey />} />
-         }
+         <Item text="Inicio" to="/" icon={<AiOutlineHome />} />
+         {!isLogged && <Item text="Ingresar" to="/auth/login" icon={<BsKey />} />}
          {user?.role === "admin" &&
             <>
                <Divisor text="Administración" />
                <Item text="Dashboard" to="/admin" icon={<BiGridAlt />} />
                <Item text="Productos" to="/admin/products" icon={<AiOutlineTags />} />
-               <Item text="Ordenes"   to="/admin/orders" icon={<MdOutlineChangeHistory />} />
-               <Item text="Usuarios"  to="/admin/users" icon={<FiUsers />} />
+               <Item text="Ordenes" to="/admin/orders" icon={<MdOutlineChangeHistory />} />
+               <Item text="Usuarios" to="/admin/users" icon={<FiUsers />} />
             </>
          }
+
+         <Divisor text="Tema" />
+         <Between>
+            <Navbar.CollapseItem>
+               <Button auto size="xs" flat icon={<BiSun />} bordered={isLight} borderWeight="light" css={{ color: isLight ? '$text' : 'default' }} onPress={() => changeTheme(true)}>Claro</Button>
+            </Navbar.CollapseItem>
+            <Navbar.CollapseItem>
+               <Button auto size="xs" flat icon={<MdOutlineNightlight />} bordered={!isLight} borderWeight="light" css={{ color: isLight ? 'default' : '$text' }} onPress={() => changeTheme(false)}>Oscuro</Button>
+            </Navbar.CollapseItem>
+         </Between>
       </Navbar.Collapse>
    )
 };
@@ -55,10 +63,9 @@ interface IItem {
 export const Item = ({ to, text, icon }: IItem) => {
    const router = useRouter();
    const location = useLocation();
-   const { logout } = useUser();
    return (
       <Navbar.CollapseItem>
-         <Link color={location.pathname === to ? "primary" : "text"} block css={{ minWidth: '100%', fontSize: '.9rem', background: `${location.pathname === to ? '$primaryLightHover' : 'none'}` }} onClick={() => text === "Salir" ? logout() : router(to)}>
+         <Link color={location.pathname === to ? "primary" : "text"} block css={{ minWidth: '100%', fontSize: '.9rem', background: `${location.pathname === to ? '$secondaryLightHover' : 'none'}` }} onClick={() => router(to)}>
             <Spacer x={.5} />{icon}<Spacer />{text}<Spacer x={.5} />
          </Link>
       </Navbar.CollapseItem>
@@ -68,7 +75,6 @@ export const Item = ({ to, text, icon }: IItem) => {
 export const Divisor = ({ text }: { text: string }) => (
    <Navbar.CollapseItem css={{ fd: 'column', ai: 'start' }}>
       <Subtitle>{text}</Subtitle>
-      <Divider y={1} />
+      <Divider y={.5} />
    </Navbar.CollapseItem>
 )
-//124

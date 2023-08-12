@@ -4,10 +4,10 @@ import Home from '../pages';
 // import Covers from '../pages/category/covers';
 // import Logos from '../pages/category/logos';
 // import Search from '../pages/search/query';
-import Product from '../pages/product/slug';
-import Cart from '../pages/cart';
+// import Product from '../pages/product/slug';
+// import Cart from '../pages/cart';
 // import Empty from '../pages/cart/empty';
-import Summary from '../pages/checkout/summary';
+// import Summary from '../pages/checkout/summary';
 
 // import Dashboard from '../pages/admin';
 // import Products from '../pages/admin/products';
@@ -25,10 +25,10 @@ export const RouterApp = () => (
     {/* <Route path="/category/covers" element={<Covers />} /> */}
     {/* <Route path="/category/logos" element={<Logos />} /> */}
     {/* <Route path="/search/:query" element={<Search />} /> */}
-    <Route path="/product/:slug" element={<Product />} />
-    <Route path="/cart" element={<Cart />} />
+    {/* <Route path="/product/:slug" element={<Product />} /> */}
+    {/* <Route path="/cart" element={<Cart />} /> */}
     {/* <Route path="/cart/empty" element={<Empty />} /> */}
-    <Route path="/checkout/summary" element={<Summary />} />
+    {/* <Route path="/checkout/summary" element={<Summary />} /> */}
 
     {/* <Route path="/admin" element={<Dashboard />} /> */}
     {/* <Route path="/admin/products" element={<Products />} /> */}
