@@ -10,10 +10,11 @@ export const Textarea = ({ name, label }: ITextarea) => (
 	<Field
 		aria-label="Textarea"
 		name={name}
-      label={label} 
+		labelPlacement="outside"
+      	label={label} 
 		fullWidth
-		color="primary"
-		helperText={<ErrorMessage name={name} />}
+		isInvalid={<ErrorMessage name={name} />}
+      	errorMessage={<ErrorMessage name={name} />}
 		as={TextField}
 	/>
 );

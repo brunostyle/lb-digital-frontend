@@ -1,6 +1,6 @@
-import { Col, Spacer, Text, Button as ButtonNext } from "@nextui-org/react"
+import { Spacer, Button } from "@nextui-org/react"
 import { Formik, Form } from "formik"
-import { Between, Button } from "../../styles"
+import { Between } from "../../styles"
 import { Input } from "../index"
 import { AiOutlineCreditCard, BsPaypal, MdClose } from "../../assets/icons";
 import { useState } from "react";
@@ -12,30 +12,31 @@ export const ProductPay = () => {
    const handleSubmit = (values: any) => {
       console.log(values)
    }
+   
    return (
-      <Col>
-         <Button color="warning" icon={<BsPaypal />}><Text b weight="black" color="blue">Pay</Text><Text b weight="black" color="secondary">Pal</Text></Button>
-         <Spacer />
-         <Button color="gradient" icon={showPay ? <MdClose /> : <AiOutlineCreditCard />} onPress={() => setShowPay(!showPay)}>
+      <div className="w-full">
+         <Button fullWidth size="sm" color="warning" startContent={<BsPaypal />}><h4 className="font-extrabold text-blue-700">Pay</h4><h4 className="font-extrabold text-white">Pal</h4></Button>
+         <Spacer y={4} />
+         <Button fullWidth size="sm" color="primary" startContent={showPay ? <MdClose /> : <AiOutlineCreditCard />} onPress={() => setShowPay(!showPay)}>
             {showPay ? 'Cancelar' : 'Tarjeta de credito'}
          </Button>
          {showPay &&
             <Formik initialValues={initial} onSubmit={handleSubmit} validationSchema={paySchema}>
                <Form className="opacity">
-                  <Spacer />
+                  <Spacer y={2} />
                   <Input name="name" label="Nombre" />
-                  <Spacer />
-                  <Input name="number" label="Numero tarjeta" />
-                  <Spacer />
+                  <Spacer y={2} />
+                  <Input type="number" name="number" label="Numero tarjeta" />
+                  <Spacer y={2} />
                   <Between>
-                     <Input name="expires" label="Expiración" />
-                     <Input name="csc" label="Nro seguridad" />
+                     <Input type="number" name="expires" label="Expiración" />
+                     <Input type="number" name="csc" label="Nro seguridad" />
                   </Between>
-                  <Spacer y={1.5} />
-                  <ButtonNext type="submit" size="sm" css={{ w: '100%' }} icon={<AiOutlineCreditCard />}>Pagar</ButtonNext>
+                  <Spacer y={4} />
+                  <Button fullWidth size="sm" color="primary" type="submit" startContent={<AiOutlineCreditCard />}>Pagar</Button>
                </Form>
             </Formik>
          }
-      </Col>
+      </div>
    )
 }

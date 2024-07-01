@@ -1,11 +1,11 @@
-import { createTheme } from '@nextui-org/react';
+import { createTheme } from '@nextui-org/react'; 
 
 export const darkTheme = createTheme({
 	type: 'dark',
 	theme: {
 		colors: {
 			backgroundContrast: '#0c0b0b',
-			opacity: 'rgba(0,0,0,.4)',
+			opacity: 'rgba(0,0,0,.6)',
 			opacityContrast: 'rgba(0,0,0,.6)',
 		},
 	},

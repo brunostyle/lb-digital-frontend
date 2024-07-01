@@ -1,6 +1,6 @@
-import { Avatar, Card, Grid, Text } from "@nextui-org/react";
+import { Button, Card, CardBody, CardFooter, CardHeader } from "@nextui-org/react";
 import { BiPencil } from '../../assets/icons'
-import { Between, Subtitle } from "../../styles";
+import { Between, Subtitle, Title } from "../../styles";
 import { useNavigate as useRouter } from "react-router-dom";
 
 interface IProductOrder {
@@ -13,30 +13,28 @@ interface IProductOrder {
 export const ProductOrder = ({ total, numberOfItems, editable = false, children }: IProductOrder) => {
    const router = useRouter();
    return (
-      <Grid xs={12} sm={6} css={{ h: 'max-content' }}>
-         <Card>
-            <Card.Header>
-               {editable ? <Text b>Orden</Text> : <Text b>Resumen ({numberOfItems} {numberOfItems === 1 ? 'producto' : 'productos'})</Text>}
-            </Card.Header>
-            <Card.Body css={{ pt: 0 }}>
-               {!editable &&
-                  <Between>
-                     <Text b>Orden</Text>
-                     <Avatar squared pointer size="xs" icon={<BiPencil />} onClick={() => router('/cart')} />
-                  </Between>}
+      <Card className="h-max">
+         <CardHeader>
+            {editable ? <Title>Orden</Title> : <Title>Resumen ({numberOfItems} {numberOfItems === 1 ? 'producto' : 'productos'})</Title>}
+         </CardHeader>
+         <CardBody className="gap-4">
+            {!editable &&
                <Between>
-                  <Subtitle>No. Productos</Subtitle>
-                  <Subtitle>{numberOfItems} {numberOfItems === 1 ? 'item' : 'items'}</Subtitle>
-               </Between>
-               <Between>
-                  <Text b>Total:</Text>
-                  <Text b>${total}</Text>
-               </Between>
-            </Card.Body>
-            <Card.Footer>
-               {children}
-            </Card.Footer>
-         </Card>
-      </Grid>
+                  <Title>Orden</Title>
+                  <Button isIconOnly variant="faded" size="sm" onPress={() => router('/cart')}><BiPencil /></Button>
+               </Between>}
+            <Between>
+               <Subtitle>No. Productos</Subtitle>
+               <Subtitle>{numberOfItems} {numberOfItems === 1 ? 'item' : 'items'}</Subtitle>
+            </Between>
+            <Between>
+               <Title>Total</Title>
+               <Title>${total}</Title>
+            </Between>
+         </CardBody>
+         <CardFooter>
+            {children}
+         </CardFooter>
+      </Card>
    )
 }

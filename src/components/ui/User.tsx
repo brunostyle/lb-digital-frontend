@@ -1,7 +1,6 @@
-import { Avatar, Popover, Spacer, User as NextUser } from "@nextui-org/react";
+import { Avatar, Popover, Spacer, User as NextUser, PopoverTrigger, PopoverContent, Button } from "@nextui-org/react";
 import { BiExit } from "../../assets/icons";
 import { useUser } from "../../state";
-import { Button } from "../../styles";
 import { IAuth } from "../../utils/interfaces";
 
 interface IProps {
@@ -11,23 +10,21 @@ interface IProps {
 export const User = ({ user }: IProps) => {
    const { logout } = useUser();
    return (
-      <Popover isBordered offset={20}>
-         <Popover.Trigger>
-            <Avatar pointer size="sm" color="primary" textColor="white" text={user.name.charAt(0).toUpperCase()} src={user.avatar} />
-         </Popover.Trigger>
-         <Popover.Content css={{ px: '$4', py: '$4' }}>
+      <Popover radius="sm" offset={20}>
+         <PopoverTrigger>
+            <Button isIconOnly size="sm" variant="light">
+               <Avatar size="sm" color="primary" name={user.name.charAt(0).toUpperCase()} src={user.avatar} />
+            </Button>
+         </PopoverTrigger>
+         <PopoverContent className="p-2">
             <NextUser
-               src={user.avatar}
-               color="primary"
-               css={{ '.nextui-avatar-text': { color: 'white' } }}
-               text={user.name.charAt(0).toUpperCase()}
+               avatarProps={{ src: user.avatar, color: 'primary' }}
                name={user.name}
                description={user.email}
-               size="sm"
             />
-            <Spacer />
-            <Button flat icon={<BiExit />} onPress={logout}>Cerrar sesion</Button>
-         </Popover.Content>
+            <Spacer y={4} />
+            <Button fullWidth size="sm" variant="bordered" startContent={<BiExit />} onPress={logout}>Cerrar sesion</Button>
+         </PopoverContent>
       </Popover>
    )
 }

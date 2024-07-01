@@ -1,3 +1,5 @@
+import { ChipProps } from "@nextui-org/react";
+
 export type TValidCategory = 'cards' | 'covers' | 'logos';
 
 export interface IProduct {
@@ -12,3 +14,9 @@ export interface IProduct {
 	tags: string[];
 	category: TValidCategory;
 }
+
+export const categories: Record<string, ChipProps["color"]> = {
+	cards: 'warning',
+	covers: 'danger',
+	logos: 'secondary',
+ }

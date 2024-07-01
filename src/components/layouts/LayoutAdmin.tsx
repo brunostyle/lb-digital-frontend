@@ -1,40 +1,52 @@
-import { SectionSubTitle, SectionTitle, Between, Main } from '../../styles';
-import { FaPlus } from "../../assets/icons";
-import { Button } from '@nextui-org/react';
+import { Between, SectionTitle } from '../../styles';
+import { AiOutlineHome, AiOutlineTags, FaPlus, IoMdSearch } from "../../assets/icons";
+import { BreadcrumbItem, Breadcrumbs, Button, Input, Spacer } from '@nextui-org/react';
 import { MenuAdmin } from '../ui/MenuAdmin';
-import { useNavigate as useRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface ILayout {
    children: JSX.Element | JSX.Element[];
    title: string;
-   description: string;
    showTitle?: boolean;
    funtional?: boolean;
+   icon?: JSX.Element;
+   isProductPage?: boolean;
 }
 
-export const LayoutAdmin = ({ children, title, description, showTitle = true, funtional = false }: ILayout) => {
-   const router = useRouter();
+export const LayoutAdmin = ({ children, title, icon, showTitle = true, funtional = false, isProductPage }: ILayout) => {
+   const router = useNavigate();
    return (
       <>
          <MenuAdmin />
-         <Main>
+         <div className="container mx-auto py-6 px-4 flex flex-col gap-4 min-h-screen">
+            <Breadcrumbs separator="/">
+               <BreadcrumbItem onPress={() => router('/')} startContent={<AiOutlineHome />}>Home</BreadcrumbItem>
+               {isProductPage && <BreadcrumbItem onPress={() => router('/admin/products')} startContent={<AiOutlineTags />}>Productos</BreadcrumbItem>}
+               <BreadcrumbItem startContent={icon}>{title}</BreadcrumbItem>
+            </Breadcrumbs>
             {showTitle &&
                <div>
                   {funtional ?
-                     <Between css={{ px: '1em' }}>
-                        <SectionTitle css={{ ta: 'start' }}>{title}</SectionTitle>
-                        <Button auto size="xs" icon={<FaPlus />} onPress={() => router('/admin/products/new')}>Agregar</Button>
-                     </Between>
-                     :
                      <>
                         <SectionTitle>{title}</SectionTitle>
-                        <SectionSubTitle>{description}</SectionSubTitle>
+                        <Spacer y={4} />
+                        <Between>
+                           <Input size="sm" placeholder="Buscar producto" startContent={<IoMdSearch />} className="w-80 max-w-[50%]" />
+                           <Button size="sm" color="primary" startContent={<FaPlus />} onPress={() => router('/admin/products/new')}>Agregar</Button>
+                        </Between>
                      </>
+                     :
+                     <Between>
+                        <SectionTitle>{title}</SectionTitle>
+                        <Input size="sm" placeholder={'Buscar ' + title.toLocaleLowerCase()} startContent={<IoMdSearch />} className="max-w-80" />
+                     </Between>
                   }
                </div>
             }
-            {children}
-         </Main>
+            <div>
+               {children}
+            </div>
+         </div>
       </>
    )
 }

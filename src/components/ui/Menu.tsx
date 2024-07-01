@@ -1,64 +1,69 @@
-import { Navbar, Text, Dropdown, Spacer, Badge } from '@nextui-org/react';
-import { FaSearch, FiShoppingCart, BiFilter, BsFillCreditCard2FrontFill, BsFillGrid3X3GapFill, IoLogoPolymer } from '../../assets/icons'
+import { Navbar, Dropdown, Spacer, Badge, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem, Button } from '@nextui-org/react';
+import { IoMdSearch, FiShoppingCart, BsFillCreditCard2FrontFill, BsFillGrid3X3GapFill, IoLogoPolymer, BiFilter } from '../../assets/icons'
 import { Formik, Form, FormikHelpers } from 'formik'
-import { InputSearch, Collapse, User } from '../index';
+import { Collapse, User, InputBordered } from '../index';
 import { searchSchema } from '../../assets/validations';
 import { useCart, useUser } from '../../state';
 import { Logo } from './Logo';
-import { useNavigate as useRouter, Link as NextLink } from 'react-router-dom'
+import { useNavigate, Link as NextLink } from 'react-router-dom'
+import { Title } from '../../styles';
 
 interface ISearch { query: string }
 const values: ISearch = { query: '' }
 
 export const Menu = () => {
-   const router = useRouter();
+   const router = useNavigate();
    const { numberOfItems } = useCart();
    const { isLogged, user } = useUser();
    const handleSubmit = ({ query }: ISearch, { resetForm }: FormikHelpers<ISearch>) => {
       router('/search/' + query);
-      // resetForm();
+      resetForm();
    }
 
    return (
-      <Navbar isCompact isBordered>
-         <Navbar.Brand>
-            <NextLink to="/">
-               <Logo />
-            </NextLink>
-            <Spacer x={.5} />
-            <Text b hideIn="xs">LB Digital</Text>
-         </Navbar.Brand>
+      <Navbar isBordered maxWidth="full">
+         <NavbarBrand>
+            <NextLink to="/"><Logo /></NextLink>
+            <Spacer x={2} />
+            <Title>LB Digital</Title>
+         </NavbarBrand>
 
-         <Navbar.Content>
-            <Navbar.Item hideIn="xs">
+         <NavbarContent justify="end" className="gap-5">
+            <NavbarItem className="hidden lg:block">
                <Formik initialValues={values} onSubmit={handleSubmit} validationSchema={searchSchema}>
                   <Form>
-                     <InputSearch name="query" label="Buscar..." icon={<FaSearch />} />
+                     <InputBordered name="query" label="Buscar..." icon={<IoMdSearch />} />
                   </Form>
                </Formik>
-            </Navbar.Item>
+            </NavbarItem>
 
-            <Dropdown isBordered>
-               <Navbar.Item>
-                  <Dropdown.Button auto light icon={<BiFilter />} ripple={false} css={{ p: '.5em' }}>Filtrar</Dropdown.Button>
-               </Navbar.Item>
-               <Dropdown.Menu aria-label="filtrado de productos" onAction={category => router('/category/' + category)}>
-                  <Dropdown.Section title="Categorias">
-                     <Dropdown.Item withDivider key="cards" icon={<BsFillCreditCard2FrontFill />} css={{ fs: 'small' }}>Tarjetas</Dropdown.Item>
-                     <Dropdown.Item key="covers" icon={<BsFillGrid3X3GapFill />} css={{ fs: 'small' }}>Portadas</Dropdown.Item>
-                     <Dropdown.Item key="logos" icon={<IoLogoPolymer />} css={{ fs: 'small' }}>Logos</Dropdown.Item>
-                  </Dropdown.Section>
-               </Dropdown.Menu>
-            </Dropdown>
+            <NavbarItem>
+               <Dropdown>
+                  <DropdownTrigger>
+                     <Button variant="light" startContent={<BiFilter />}>Filtrar</Button>
+                  </DropdownTrigger>
+                  <DropdownMenu variant="bordered" aria-label="filtrado de productos" onAction={category => router('/category/' + category)}>
+                     <DropdownSection title="Categorias">
+                        <DropdownItem showDivider key="cards" startContent={<BsFillCreditCard2FrontFill />}>Tarjetas</DropdownItem>
+                        <DropdownItem key="covers" startContent={<BsFillGrid3X3GapFill />}>Portadas</DropdownItem>
+                        <DropdownItem key="logos" startContent={<IoLogoPolymer />}>Logos</DropdownItem>
+                     </DropdownSection>
+                  </DropdownMenu>
+               </Dropdown>
+            </NavbarItem>
 
-            <Badge isInvisible={numberOfItems === 0} content={numberOfItems < 10 ? numberOfItems : "+9"} disableAnimation disableOutline size="sm" color="primary" css={{ top: -5, right: -5 }}>
-               <Navbar.Link onClick={() => router('/cart')}><FiShoppingCart /></Navbar.Link>
-            </Badge>
+            <NavbarItem>
+               <Badge isInvisible={numberOfItems === 0} content={numberOfItems < 10 ? numberOfItems : "+9"} showOutline={false} color="primary" size="sm" >
+                  <Button isIconOnly variant="light" onPress={() => router('/cart')}><FiShoppingCart /></Button>
+               </Badge>
+            </NavbarItem>
 
-            {isLogged && <User user={user!} />}
+            <NavbarItem>
+               {isLogged && <User user={user!} />}
+            </NavbarItem>
 
-            <Navbar.Toggle />
-         </Navbar.Content>
+            <NavbarMenuToggle />
+         </NavbarContent>
 
          <Collapse />
       </Navbar>

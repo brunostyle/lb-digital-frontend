@@ -1,32 +1,23 @@
-import { Button, Grid, Image, Row, Spacer, Text } from "@nextui-org/react";
+import { Button, Image } from "@nextui-org/react";
 import { BsInstagram, FaFacebookF } from "../../assets/icons";
+import { Subtitle } from "../../styles";
 
 export const Banner = () => (
-   <Grid.Container alignItems="center" css={{ minHeight: '100vh', px: '1em' }}>
-      <Grid xs={12} sm={6} direction="column">
-         <Text h1 size="3em">
+   <div className="grid gap-4 md:grid-cols-2 min-h-screen items-center">
+      <div className="flex flex-col gap-4 mb-36">
+         <h1 className="text-5xl leading-snug font-bold">
             Encontra productos de calidad en
-            <Text span css={{ textGradient: '45deg, $blue100 -20%, $pink600 50%' }}> LB Digital </Text>
+            <span className="bg-gradient-to-bl from-blue-500 to-pink-500 bg-clip-text text-transparent leading-normal"> LB Digital </span>
             porque diseñar es hacerlo visual
-         </Text>
-         <Text color="gray">Tarjetas, Portadas, Logos, Diseños personalizados, etc</Text>
-         <Spacer />
-         <Row>
-            <Button auto size="sm">
-               <FaFacebookF />
-               <Text hideIn="xs"><Spacer x={.5} /></Text>
-               <Text hideIn="xs" color="white">Facebook</Text>
-            </Button>
-            <Spacer />
-            <Button as="a" auto size="sm" bordered href="https://www.instagram.com/lb_digitaloficial/" target="_blank">
-               <BsInstagram />
-               <Text hideIn="xs"><Spacer x={.5} /></Text>
-               <Text hideIn="xs" color="inherit">Instagram</Text>
-            </Button>
-         </Row>
-      </Grid>
-      <Grid xs={0} sm={6}>
+         </h1>
+         <Subtitle>Tarjetas, Portadas, Logos, Diseños personalizados, etc</Subtitle>
+         <div className="flex gap-4">
+            <Button color="primary" size="sm" startContent={<FaFacebookF />}>Facebook</Button>
+            <Button color="primary" as="a" size="sm" variant="bordered" startContent={<BsInstagram />} href="https://www.instagram.com/lb_digitaloficial/" target="_blank">Instagram</Button>
+         </div>
+      </div>
+      <div className="hidden md:block mb-36">
          <Image className="flot" src="illustration.png" alt="Ilustracion" />
-      </Grid>
-   </Grid.Container>
+      </div>
+   </div>
 )

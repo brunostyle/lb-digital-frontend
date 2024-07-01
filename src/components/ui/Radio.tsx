@@ -1,4 +1,4 @@
-import { Radio as RadioNext, Text } from "@nextui-org/react";
+import { RadioGroup, Radio as RadioNext } from "@nextui-org/react";
 import { TValidCategory } from "../../utils/interfaces";
 
 interface IProps {
@@ -9,11 +9,11 @@ interface IProps {
 
 export const Radio = ({ label, defaultValue, onChange }:IProps) => (
    <div>
-      <Text color="primary" small>{label}</Text>
-      <RadioNext.Group aria-label="categoria" defaultValue={defaultValue} size="xs" orientation="horizontal" css={{overflow: 'scroll'}} onChange={onChange}>
+      <h4 className="text-xs mb-2">{label}</h4>
+      <RadioGroup aria-label="categoria" defaultValue={defaultValue} size="sm" orientation="horizontal" onValueChange={onChange}>
          <RadioNext value="cards">Tarjetas</RadioNext>
          <RadioNext value="covers">Portadas</RadioNext>
          <RadioNext value="logos">Logos</RadioNext>
-      </RadioNext.Group>
+      </RadioGroup>
    </div>
 );

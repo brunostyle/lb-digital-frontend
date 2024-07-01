@@ -1,4 +1,4 @@
-import { Image, Spacer, Text } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 import { Center } from "../../styles";
 
 interface INothing {
@@ -9,9 +9,8 @@ interface INothing {
 
 export const Nothing = ({ text, svg, children }: INothing) => (
    <Center>
-      <Image className="opacity" showSkeleton src={svg} width="300px" height="300px" objectFit='contain' alt="No se encontraron resultados" />
-      <Text size="1em">{text}</Text>
-      <Spacer />
+      <Image className="opacity" src={svg} width="300px" height="300px" alt="No se encontraron resultados" />
+      <h4>{text}</h4>
       {children}
    </Center>
 )

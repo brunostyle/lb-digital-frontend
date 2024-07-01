@@ -1,7 +1,7 @@
-import { Navbar, Link, Button, Spacer, Divider } from '@nextui-org/react';
-import { Formik, Form, FormikHelpers } from 'formik'
-import { FaSearch, AiOutlineHome, BsKey, FiUsers, BiGridAlt, AiOutlineTags, MdOutlineChangeHistory, BiSun, MdOutlineNightlight } from '../../assets/icons'
-import { InputSearch } from './Input';
+import { Button, Divider, NavbarMenuItem, NavbarMenu } from '@nextui-org/react';
+import { Formik, Form } from 'formik'
+import { IoMdSearch, AiOutlineHome, BsKey, FiUsers, BiGridAlt, AiOutlineTags, MdOutlineChangeHistory, BiSun, MdOutlineNightlight } from '../../assets/icons'
+import { InputBordered } from './Input';
 import { Between, Subtitle } from '../../styles';
 import { searchSchema } from '../../assets/validations';
 import { useTheme, useUser } from '../../state';
@@ -13,24 +13,25 @@ const values: ISearch = { query: '' }
 export const Collapse = () => {
    const router = useRouter();
    const { isLight, changeTheme } = useTheme();
-   const { isLogged, user } = useUser();
-   const handleSubmit = ({ query }: ISearch, { resetForm }: FormikHelpers<ISearch>) => {
+   const { user, isLogged } = useUser();
+   const handleSubmit = ({ query }: ISearch) => {
       router('/search/' + query);
    }
 
    return (
-      <Navbar.Collapse css={{ '@xs': { mw: 'max-content', minWidth: '200px', left: 'auto' } }}>
-         <Formik initialValues={values} onSubmit={handleSubmit} validationSchema={searchSchema}>
-            <Form>
-               <Navbar.CollapseItem css={{ '@xs': { display: 'none' } }}>
-                  <InputSearch name="query" label="Buscar..." icon={<FaSearch />} />
-               </Navbar.CollapseItem>
-            </Form>
-         </Formik>
+      <NavbarMenu className="min-w-52 max-w-max left-auto">
+         <NavbarMenuItem className="lg:hidden">
+            <Formik initialValues={values} onSubmit={handleSubmit} validationSchema={searchSchema}>
+               <Form>
+                  <InputBordered name="query" label="Buscar..." icon={<IoMdSearch />} />
+               </Form>
+            </Formik>
+         </NavbarMenuItem>
 
          <Divisor text="Menu" />
          <Item text="Inicio" to="/" icon={<AiOutlineHome />} />
          {!isLogged && <Item text="Ingresar" to="/auth/login" icon={<BsKey />} />}
+
          {user?.role === "admin" &&
             <>
                <Divisor text="Administración" />
@@ -43,14 +44,14 @@ export const Collapse = () => {
 
          <Divisor text="Tema" />
          <Between>
-            <Navbar.CollapseItem>
-               <Button auto size="xs" flat icon={<BiSun />} bordered={isLight} borderWeight="light" css={{ color: isLight ? '$text' : 'default' }} onPress={() => changeTheme(true)}>Claro</Button>
-            </Navbar.CollapseItem>
-            <Navbar.CollapseItem>
-               <Button auto size="xs" flat icon={<MdOutlineNightlight />} bordered={!isLight} borderWeight="light" css={{ color: isLight ? 'default' : '$text' }} onPress={() => changeTheme(false)}>Oscuro</Button>
-            </Navbar.CollapseItem>
+            <NavbarMenuItem>
+               <Button size="sm" variant={isLight ? 'flat' : 'light'} startContent={<BiSun />} onPress={() => changeTheme(true)}>Claro</Button>
+            </NavbarMenuItem>
+            <NavbarMenuItem>
+               <Button size="sm" variant={isLight ? 'light' : 'flat'} startContent={<MdOutlineNightlight />} onPress={() => changeTheme(false)}>Oscuro</Button>
+            </NavbarMenuItem>
          </Between>
-      </Navbar.Collapse>
+      </NavbarMenu>
    )
 };
 
@@ -64,17 +65,17 @@ export const Item = ({ to, text, icon }: IItem) => {
    const router = useRouter();
    const location = useLocation();
    return (
-      <Navbar.CollapseItem>
-         <Link color={location.pathname === to ? "primary" : "text"} block css={{ minWidth: '100%', fontSize: '.9rem', background: `${location.pathname === to ? '$secondaryLightHover' : 'none'}` }} onClick={() => router(to)}>
-            <Spacer x={.5} />{icon}<Spacer />{text}<Spacer x={.5} />
-         </Link>
-      </Navbar.CollapseItem>
+      <NavbarMenuItem>
+         <Button fullWidth color={location.pathname === to ? "primary" : "default"} className="justify-start" size="md" startContent={icon} variant={location.pathname === to ? "flat" : "light"} onPress={() => router(to)}>
+            {text}
+         </Button>
+      </NavbarMenuItem>
    )
 }
 
 export const Divisor = ({ text }: { text: string }) => (
-   <Navbar.CollapseItem css={{ fd: 'column', ai: 'start' }}>
+   <NavbarMenuItem>
       <Subtitle>{text}</Subtitle>
-      <Divider y={.5} />
-   </Navbar.CollapseItem>
+      <Divider />
+   </NavbarMenuItem>
 )

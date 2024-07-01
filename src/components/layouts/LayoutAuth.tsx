@@ -1,6 +1,5 @@
-// import Head from 'next/head';
-import { Card, Col, Grid, Image, Text } from "@nextui-org/react";
-import { Gradient, grid, SectionTitle } from '../../styles';
+import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import { Gradient, SectionSubTitle, SectionTitle } from '../../styles';
 import { Logo } from "../ui/Logo";
 
 interface ILayout {
@@ -10,30 +9,19 @@ interface ILayout {
 }
 
 export const LayoutAuth = ({ children, title, description }: ILayout) => (
-   <>
-      {/* <Head>
-         <title>{title}</title>
-      </Head> */}
-      <Gradient>
-         <Grid.Container justify="center" css={{ ...grid, minHeight: '100vh', '@xs': { ai: 'center' } }}>
-            <Grid xs={0} sm={5} direction="column" css={{ mr: '2em' }}>
-               <Image className="flot" src="/illustration.png" alt="Ilustracion" />
-            </Grid>
-            <Grid xs={12} sm={5}>
-               <Card css={{ py: '1em', ta: 'center' }}>
-                  <Card.Header>
-                     <Col>
-                        <Logo big />
-                        <SectionTitle>{title}</SectionTitle>
-                        <Text color="gray" size="1em">{description}</Text>
-                     </Col>
-                  </Card.Header>
-                  <Card.Body>
-                     {children}
-                  </Card.Body>
-               </Card>
-            </Grid>
-         </Grid.Container>
-      </Gradient>
-   </>
+   <Gradient>
+      <div className="container mx-auto p-4 grid grid-cols-2 gap-4 min-h-screen place-content-center">
+         <Image className="flot hidden md:block" src="/illustration.png" alt="Ilustracion" />
+         <Card isBlurred className="col-span-2 md:col-span-1">
+            <CardHeader className="grid justify-center text-center gap-2">
+               <Logo big />
+               <SectionTitle>{title}</SectionTitle>
+               <SectionSubTitle>{description}</SectionSubTitle>
+            </CardHeader>
+            <CardBody>
+               {children}
+            </CardBody>
+         </Card>
+      </div>
+   </Gradient>
 )

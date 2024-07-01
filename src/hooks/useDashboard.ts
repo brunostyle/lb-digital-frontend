@@ -15,7 +15,7 @@ interface IProps {
 export const useDashboard = ({key, path}:IProps) => {
    return useQuery({
       queryKey: [key],
-      queryFn: () => getDashboard(path),
-      refetchInterval: 30 * 1000
+      queryFn: () => getDashboard(path),                         
+      // refetchInterval: 30 * 1000
    })
 }

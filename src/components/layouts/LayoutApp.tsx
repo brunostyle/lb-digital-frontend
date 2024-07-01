@@ -1,5 +1,4 @@
 // import Head from 'next/head';
-import { Main } from '../../styles';
 import { Menu } from '../index';
 
 interface ILayout {
@@ -9,7 +8,7 @@ interface ILayout {
 	imageFullUrl?: string;
 }
 
-export const LayoutApp = ({ children, title, description, imageFullUrl }: ILayout) => (
+export const LayoutApp = ({ children }: ILayout) => (
 	<>
 		{/* <Head>
 			<title>{title}</title>
@@ -20,9 +19,9 @@ export const LayoutApp = ({ children, title, description, imageFullUrl }: ILayou
 		</Head> */}
 
 		<Menu />
-		<Main>
+		<div className="container mx-auto p-4 min-h-screen">
 			{children}
-		</Main>
+		</div>
 	</>
 );
 

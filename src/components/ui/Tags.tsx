@@ -1,23 +1,22 @@
 import { useState } from "react";
-import { Button, Grid, Row, Spacer } from "@nextui-org/react";
-import { StyledTags } from "../../styles";
+import { Button, Chip } from "@nextui-org/react";
 import { InputTags } from "./Input";
-import { GrAdd, MdClose } from "../../assets/icons";
+import { GrAdd } from "../../assets/icons";
 
 interface IProps {
    tags: string[];
    setTags: any;
 }
 
-export const Tags = ({ tags, setTags }:IProps) => {
+export const Tags = ({ tags, setTags }: IProps) => {
    const [tagValue, setTagValue] = useState<string>('');
-   
+
    const removeTag = (tag: string) => {
       setTags(tags.filter(t => t !== tag))
    }
 
    const addTag = () => {
-      if(tagValue === "") return;
+      if (tagValue === "") return;
       const newTag = tagValue.trim().toLowerCase();
       if (tags.includes(newTag)) return;
       setTagValue('');
@@ -26,14 +25,12 @@ export const Tags = ({ tags, setTags }:IProps) => {
 
    return (
       <div>
-         <Row align="flex-end">
-            <InputTags label="Etiquetas" value={tagValue} onChange={setTagValue} />
-            <Spacer x={.2} />
-            <Button flat auto size="sm" onPress={addTag}><GrAdd /></Button>
-         </Row>
-         <Grid.Container gap={1}>
-            {tags.length > 0 && tags.map(tag => <Grid key={tag}><StyledTags>{tag} <MdClose size={15} cursor="pointer" onClick={() => removeTag(tag)} /></StyledTags></Grid>)}
-         </Grid.Container>
+         <InputTags label="Etiquetas" value={tagValue} onChange={setTagValue} addTag={addTag} content={
+            <Button isIconOnly variant="ghost" size="sm" onPress={addTag}><GrAdd /></Button>
+         } />
+         <div className="flex gap-1 mt-4">
+            {tags.length > 0 && tags.map(tag => <div key={tag}><Chip color="primary" size="sm" variant="flat" onClose={() => removeTag(tag)}>{tag}</Chip></div>)}
+         </div>
       </div>
 
    )

@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { IProduct } from "../utils/interfaces"
 
 interface ICart {
@@ -10,7 +10,18 @@ interface ICart {
 }
 
 export const useCart = create<ICart>((set, get) => ({
-   cart: [],
+   cart: [
+      // {
+      //    _id: '1',
+      //    title: "Men's Chill Crew Neck Sweatshirt",
+      //    description: 'Introducing the Tesla Chill Collection',
+      //    images: ['1740176-00-A_0_2000.jpg', '1740176-00-A_1.jpg'],
+      //    category: 'cards',
+      //    price: 75,
+      //    slug: 'mens_chill_crew_neck_sweatshirt',
+      //    tags: ['sweatshirt'],
+      // },
+   ],
    total: 0,
    numberOfItems: 0,
 

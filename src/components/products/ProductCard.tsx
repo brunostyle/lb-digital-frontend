@@ -1,7 +1,7 @@
-import { Avatar, Card, Grid, Spacer, Text } from "@nextui-org/react";
-import { IProduct } from "../../utils/interfaces"
+import { Button, Card, CardBody, CardFooter, Chip, Image, Spacer } from "@nextui-org/react";
+import { IProduct, categories } from "../../utils/interfaces"
 import { AiFillDelete } from '../../assets/icons'
-import { HiddenTitle, StyledCategory, Subtitle } from "../../styles";
+import { HiddenTitle, Subtitle, Title } from "../../styles";
 import { useCart } from "../../state";
 import { Link } from "react-router-dom";
 
@@ -12,31 +12,23 @@ interface IProductCard {
 
 export const ProductCard = ({ cart, editable = false }: IProductCard) => {
    const { removeProductToCart } = useCart();
-   return (
-      <Grid xs={12} sm={6} direction="column">
-         {cart.map(product => (
-            <Card key={product._id} css={{ mb: '1em' }}>
-               <Grid.Container>
-                  <Grid xs={2}>
-                     <Link to={"/product/" + product.slug}>
-                        <Card.Image src={'/products/' + product.images[0]} alt={product.title} width="100%" height="100%" objectFit="cover" />
-                     </Link>
-                  </Grid>
-                  <Grid xs={8}>
-                     <Card.Body css={{ py: '.5rem' }}>
-                        <HiddenTitle b>{product.title}</HiddenTitle>
-                        <Subtitle>{product.description}</Subtitle>
-                        <Spacer y={.5} />
-                        <div><StyledCategory type={product.category}>{product.category}</StyledCategory></div>
-                     </Card.Body>
-                  </Grid>
-                  <Grid xs={2} direction="column" justify="center" alignItems="center">
-                     <Text b>${product.price}</Text>
-                     {editable && <><Spacer y={.5} /><Avatar squared pointer size="xs" icon={<AiFillDelete />} onClick={() => removeProductToCart(product)} /></>}
-                  </Grid>
-               </Grid.Container>
-            </Card>
-         ))}
-      </Grid>
-   )
+   return <>
+      {cart.map(product => (
+         <Card isFooterBlurred key={product._id} className="grid grid-cols-12 mb-4">
+            <Link to={"/product/" + product.slug} className="col-span-2">
+               <Image src={'/products/' + product.images[0]} alt={product.title} width="100%" height="100%" />
+            </Link>
+            <CardBody className="col-span-8">
+               <HiddenTitle>{product.title}</HiddenTitle>
+               <Subtitle>{product.description}</Subtitle>
+               <Spacer />
+               <Chip variant="flat" size="sm" color={categories[product.category]}>{product.category}</Chip>
+            </CardBody>
+            <CardFooter className="col-span-2 flex flex-col justify-between">
+               <Title>${product.price}</Title >
+               {editable && <Button isIconOnly variant="faded" size="sm" onPress={() => removeProductToCart(product)}><AiFillDelete /></Button>}
+            </CardFooter>
+         </Card>
+      ))}
+   </>
 }

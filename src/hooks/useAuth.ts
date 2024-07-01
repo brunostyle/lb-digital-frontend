@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useUser } from "../state";
 import { baseURL } from "../utils/database/api";
 import { IAuth, ILogin, IRegister } from "../utils/interfaces";
+import { useNavigate as useRouter } from "react-router-dom"
 
 const auth = async (path: string, data: ILogin | IRegister):Promise<IAuth> => {
    const res = await fetch(baseURL + path);
@@ -23,11 +24,14 @@ interface IProps {
 }
 
 export const useAuth = ({path}:IProps) => {
+   const router = useRouter();
    const { login } = useUser();
-   return useMutation((data: ILogin | IRegister) => auth(path, data), {
+   return useMutation({
+      mutationFn: (data: ILogin | IRegister) => auth(path, data),
       onSuccess: (user) => {
          localStorage.setItem('token', user.token);
-         login(user)
+         login(user);
+         router('/');
       }
    })
 }
@@ -42,11 +46,14 @@ const renew = async (token: string):Promise<IAuth> => {
 
 
 export const useAuthRenew = () => {
+   const router = useRouter();
 	const { login } = useUser();
-	return useMutation(renew, {
+	return useMutation({
+      mutationFn: renew,
 		onSuccess: (user) => {
 			localStorage.setItem('token', user.token);
 			login(user);
+         router('/');
 		},
 	});
 };
